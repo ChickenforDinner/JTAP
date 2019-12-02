@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title></title>
+
+    <link href="/assets/plugins/morris-chart/morris.css" rel="stylesheet">
+    <link href="/assets/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet"/>
+    <link href="/assets/css/icons.css" rel="stylesheet">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/assets/css/responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+    <title>题库管理</title>
+</head>
+
+<body class="sticky-header">
+<!--引入左侧菜单栏-->
+<div th:replace="/teacher/lefter :: lefterBar(activeUrl='question')"></div>
+		<!-- main content start-->
+        <div class="main-content" >
+            <!--引入上部分-->
+            <div th:replace="/teacher/header :: headerBar"></div>
+
+            <!--body wrapper start-->
+            <div class="wrapper">
+
+                <!--Start Page Title-->
+                <div class="page-title-box">
+                    <h4 class="page-title">题目添加</h4>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="#">题库管理</a>
+                        </li>
+
+                        <li class="active">
+                            题目添加
+                        </li>
+                    </ol>
+                    <div class="clearfix"></div>
+                </div>
+                <!--End Page Title-->
+
+
+                <!--Start row-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="white-box">
+                            <form class="form-horizontal" action="/teacher/question/add" method="post">
+
+                            <!--题目类型：1选择题,2判断题,3填空题-->
+                          <div class="form-group">
+                             <label for="inputUsername6" class="col-sm-2 control-label">题目类型</label>
+                                <div class="col-sm-6">
+                                  <select class="form-control" name="type">
+                                      <option value="1">选择题</option>
+                                      <option value="2">判断题</option>
+                                      <option value="3">填空题</option>
+                                  </select>
+                                 </div>
+                          </div>
+                            <div class="form-group">
+                              <label for="inputUsername1" class="col-sm-2 control-label">题目描述</label>
+                              <div class="col-sm-6">
+                              <!-- <input type="text" class="form-control" id="inputUsername1" placeholder="题目描述" name="description">-->
+                                <textarea class="form-control" rows="9" name="description"></textarea>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                                 <label for="inputUsername2" class="col-sm-2 control-label">题目答案</label>
+                                 <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="inputUsername2" placeholder="题目答案" name="answer">
+                                  </div>
+                            </div>
+
+                             <div class="form-group">
+                                 <label for="inputUsername3" class="col-sm-2 control-label">题目答案详解</label>
+                                  <div class="col-sm-6">
+                                      <!-- <input type="text" class="form-control" id="inputUsername3" placeholder="题目答案详解" name="detail">-->
+                                       <textarea class="form-control" rows="9" name="detail"></textarea>
+                                  </div>
+                              </div>
+
+                            <div class="form-group">
+                              <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-default" id="addButton">添加</button>
+                                <span>[[${msg}]]</span>
+                              </div>
+                            </div>
+                          </form>
+
+                         </div>
+                    </div>
+                 </div>
+
+                <!--End row-->
+
+            </div>
+            <!-- End Wrapper-->
+
+            <!-- <div th:replace="/teacher/footer :: footerBar"></div>-->
+
+        </div>
+        <!--End main content -->
+
+
+
+        <!--Begin core plugin -->
+        <script src="/assets/js/jquery.min.js"></script>
+        <script src="/assets/js/bootstrap.min.js"></script>
+        <script src="/assets/plugins/moment/moment.js"></script>
+        <script src="/assets/js/jquery.slimscroll.js "></script>
+        <script src="/assets/js/jquery.nicescroll.js"></script>
+        <script src="/assets/js/functions.js"></script>
+        <!-- End core plugin -->
+
+        <!--Begin Page Level Plugin-->
+        <script src="/assets/plugins/morris-chart/morris.js"></script>
+        <script src="/assets/plugins/morris-chart/raphael-min.js"></script>
+        <script src="/assets/plugins/jquery-sparkline/jquery.charts-sparkline.js"></script>
+        <script src="/assets/pages/dashboard2.js"></script>
+        <script src="/assets/plugins/chart-js/Chart.js"></script>
+
+ <script>
+                    $(function() {
+                        $("#addButton").click(function() {
+                            alert("添加成功");
+                        })
+                    })
+                </script>
+        </body>
+
+        </html>

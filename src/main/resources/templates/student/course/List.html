@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title></title>
+
+    <link href="/assets/plugins/morris-chart/morris.css" rel="stylesheet">
+    <link href="/assets/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet"/>
+    <link href="/assets/css/icons.css" rel="stylesheet">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/assets/css/responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+    <title>Title</title>
+</head>
+<body class="sticky-header">
+
+<!--引入左侧菜单栏-->
+<div th:replace="/student/lefter :: lefterBar"></div>
+
+    <!-- main content start-->
+    <div class="main-content" >
+            <!--引入上部分-->
+            <div th:replace="/student/header :: headerBar"></div>
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+
+              <!--Start Page Title-->
+               <div class="page-title-box">
+                    <h4 class="page-title">课件</h4>
+
+                    <div class="clearfix"></div>
+                 </div>
+                  <!--End Page Title-->
+
+                  <!--Start row-->
+                  <div class="row">
+                    <div class="col-md-12">
+                       <div class="white-box">
+
+                            <div class="panel-group accordion-main faq-main" id="accordion">
+                            <div th:each="course:${courseList}">
+                                   <!--FAQ Item-->
+                                   <div class="panel">
+                                      <div class="panel-heading collapsed" data-toggle="collapse"
+                                                                              data-parent="#accordion" th:data-target="'#id'+${course.id}">
+                                      <h6 class="panel-title accordion-toggle">
+                                          第[[${course.unit}]]章：[[${course.name}]]
+                                      </h6>
+                                    </div>
+                                <div th:id="id+${course.id}" class="panel-collapse collapse">
+                                        <div class="panel-body"><p/>
+                                               <p>课件下载&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                   <span th:each="type1:${course.source1List}">
+                                                     <a class="btn btn-info"  th:href="${type1.path}">[[${type1.name}]]</a>
+                                                    </span>
+
+                                               </p><hr style="height:1px;border:none;border-top:1px dashed #0066CC;" />
+                                               <p>实验作业&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                               <span th:each="type2:${course.source2List}">
+                                                     <a class="btn btn-info"  th:href="${type2.path}">[[${type2.name}]]</a>
+                                                </span>
+                                               </p><hr style="height:1px;border:none;border-top:1px dashed #0066CC;" />
+                                               <p>在线视频&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                               <span th:each="type3:${course.source3List}">
+                                                      <a class="btn btn-info"  th:href="@{/student/course/toSeeVideo/}+${type3.id}">[[${type3.name}]]</a>
+                                                </span>
+                                               </p><hr style="height:1px;border:none;border-top:1px dashed #0066CC;" />
+                                               <p>辅助材料&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <span th:each="type4:${course.source4List}">
+                                                  <a class="btn btn-info"  th:href="${type4.path}">[[${type4.name}]]</a>
+                                                </span>
+                                               </p><hr style="height:1px;border:none;border-top:1px dashed #0066CC;" />
+                                               <p>在线试题&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                               <a th:href="@{/student/course/toDoQuestion/}+${course.id}" class="btn btn-info">在线做题</a>
+                                               </p><hr style="height:1px;border:none;border-top:1px dashed #0066CC;" />
+                                              <!-- <a class="btn btn-info">1.点击下载课件</a><hr style="height:1px;border:none;border-top:1px dashed #0066CC;" />
+                                               <a class="btn btn-primary">2.下载实验作业</a><hr style="height:1px;border:none;border-top:1px dashed #0066CC;" />
+                                               <a class="btn btn-warning">3.观看在线视频</a><hr style="height:1px;border:none;border-top:1px dashed #0066CC;" />
+                                               <a class="btn btn-success">4.下载辅助材料</a><br/>-->
+                                         </div>
+                                </div>
+                                 </div>
+                            </div>
+
+
+                            </div>
+                       </div>
+                      </div>
+                  </div>
+                  <!--End row-->
+
+
+            </div>
+      <!-- End Wrapper-->
+
+
+        <!--Start  Footer -->
+        <div th:replace="/student/footer :: footerBar"></div>
+         <!--End footer -->
+
+       </div>
+      <!--End main content -->
+
+
+
+    <!--Begin core plugin -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/plugins/moment/moment.js"></script>
+    <script  src="/assets/js/jquery.slimscroll.js "></script>
+    <script src="/assets/js/jquery.nicescroll.js"></script>
+    <script src="/assets/js/functions.js"></script>
+    <!-- End core plugin -->
+
+
+</body>
+
+</html>

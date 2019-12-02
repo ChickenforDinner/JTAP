@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title></title>
+
+    <link href="/assets/plugins/morris-chart/morris.css" rel="stylesheet">
+    <link href="/assets/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet"/>
+    <link href="/assets/css/icons.css" rel="stylesheet">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/assets/css/responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+    <title>Title</title>
+</head>
+
+<body class="sticky-header">
+<!--引入左侧菜单栏-->
+<div th:replace="/teacher/lefter :: lefterBar(activeUrl='student')"></div>
+		<!-- main content start-->
+        <div class="main-content" >
+            <!--引入上部分-->
+            <div th:replace="/teacher/header :: headerBar"></div>
+
+            <!--body wrapper start-->
+            <div class="wrapper">
+
+                <!--Start Page Title-->
+                <div class="page-title-box">
+                    <h4 class="page-title">学生列表</h4>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="#">学生管理</a>
+                        </li>
+
+                        <li class="active">
+                            学生列表
+                        </li>
+                    </ol>
+                    <div class="clearfix"></div>
+                </div>
+                <!--End Page Title-->
+
+
+                 <!--Start row-->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                <form class="form-inline" th:action="@{/teacher/student/list}" method="post">
+                                    <div class="col-md-12">
+                                        <div class="analytics-box white-box">
+                                            <h3>查询条件</h3><br/>
+                                            <input type="hidden" name="teacherId" th:value="${session.user!=null?session.user.id:0}">
+                                            <div class="form-group">
+                                               <label for="exampleInputName2">学期：</label>
+                                               <select class="form-control" name="termId">
+                                                 <option th:each="term:${termList}" th:value="${term.id}">[[${term.name}]]</option>
+
+                                               </select>
+                                               <label for="exampleInputName3">学号：</label>
+                                               <input type="text" class="form-control" id="exampleInputName3" placeholder="学号" name="username">
+                                               <button type="submit" class="btn btn-success">查询</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!--End row-->
+
+
+
+                <!--Start row-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="white-box">
+                           <!-- 学期列表 -->
+                           <table class="table table-striped table-sm">
+                           				<thead>
+                           				<tr>
+                           					<th>#</th>
+                           					<th>id</th>
+                           					<th>姓名</th>
+                           					<th>学号</th>
+                           					<th>性别</th>
+                           					<th>专业</th>
+                           					<th>操作</th>
+                           				</tr>
+                           				</thead>
+                           				<tbody>
+
+                           				<tr th:each="stu:${studentList}">
+                           					<td></td>
+                           					<td>[[${stu.id}]]</td>
+                           					<td>[[${stu.name}]]</td>
+                           					<td>[[${stu.username}]]</td>
+                           					<td>[[${stu.gender}]]</td>
+                           					<td>[[${stu.major}]]</td>
+                           					<td>
+                           						<a class="btn btn-sm btn-info" th:href="@{/teacher/student/toEdit/}+${stu.id}">学生编辑</a>
+                           						<a class="btn btn-sm btn-danger" th:href="@{/teacher/student/delete/}+${stu.id}" >学生删除</a>
+                           					</td>
+                           				</tr>
+                           				</tbody>
+                         </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End row-->
+
+            </div>
+            <!-- End Wrapper-->
+
+            <!-- <div th:replace="/teacher/footer :: footerBar"></div>-->
+
+        </div>
+        <!--End main content -->
+
+
+
+        <!--Begin core plugin -->
+        <script src="/assets/js/jquery.min.js"></script>
+        <script src="/assets/js/bootstrap.min.js"></script>
+        <script src="/assets/plugins/moment/moment.js"></script>
+        <script src="/assets/js/jquery.slimscroll.js "></script>
+        <script src="/assets/js/jquery.nicescroll.js"></script>
+        <script src="/assets/js/functions.js"></script>
+        <!-- End core plugin -->
+
+        <!--Begin Page Level Plugin-->
+        <script src="/assets/plugins/morris-chart/morris.js"></script>
+        <script src="/assets/plugins/morris-chart/raphael-min.js"></script>
+        <script src="/assets/plugins/jquery-sparkline/jquery.charts-sparkline.js"></script>
+        <script src="/assets/pages/dashboard2.js"></script>
+        <script src="/assets/plugins/chart-js/Chart.js"></script>
+
+
+        </body>
+
+        </html>

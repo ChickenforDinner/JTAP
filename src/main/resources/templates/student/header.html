@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- header section start-->
+<div class="header-section" th:fragment="headerBar">
+
+    <a class="toggle-btn"><i class="fa fa-bars"></i></a>
+
+   <b style="color: #0e90d2">《Java程序设计》教学辅助平台</b>
+    <!--notification menu start -->
+    <div class="menu-right">
+        <ul class="notification-menu">
+
+
+            <li>
+                <a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
+                    <i class="fa fa-bell-o"></i>
+                    <span class="badge">4</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-head pull-right">
+                    <h5 class="title">Notifications</h5>
+                    <ul class="dropdown-list normal-list">
+                        <li class="message-list message-scroll-list">
+
+
+                            <a href="#">
+                                <span class="subject">John Doe</span>
+                                <span class="message"> New tasks needs to be done</span>
+                                <span class="time">20 minutes ago</span>
+                            </a>
+
+                            <a href="#">
+                                <span class="subject">John Doe</span>
+                                <span class="message"> New tasks needs to be done</span>
+                                <span class="time">20 minutes ago</span>
+                            </a>
+                        </li>
+                        <li class="last"> <a  href="#">All Messages</a> </li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <img src="/assets/images/users/avatar-6.jpg" alt="" />
+                    [[${session.user!=null?session.user.name:''}]]
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                    <li> <a th:href="@{/student/personInfo}"> <i class="fa fa-user"></i>个人信息</a> </li>
+                    <li> <a th:href="@{/logout}"> <i class="fa fa-lock"></i> 退出</a> </li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+    <!--notification menu end -->
+
+</div>
+<!-- header section end-->
+</body>
+</html>

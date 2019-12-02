@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Java教学辅助平台</title>
+
+    <link href="/assets/plugins/morris-chart/morris.css" rel="stylesheet">
+    <link href="/assets/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet"/>
+    <link href="/assets/css/icons.css" rel="stylesheet">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/assets/css/responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+    <title>消息通知管理</title>
+</head>
+
+<body class="sticky-header">
+<!--引入左侧菜单栏-->
+<div th:replace="/teacher/lefter :: lefterBar(activeUrl='homework')"></div>
+		<!-- main content start-->
+        <div class="main-content" >
+            <!--引入上部分-->
+            <div th:replace="/teacher/header :: headerBar"></div>
+
+            <!--body wrapper start-->
+            <div class="wrapper">
+
+                <!--Start Page Title-->
+                <div class="page-title-box">
+                    <h4 class="page-title">作业添加</h4>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="#">课后作业</a>
+                        </li>
+
+                        <li class="active">
+                            作业添加
+                            <input type="hidden" th:value="${homeworkId}" id="homeworkId">
+                            <input type="hidden" th:value="${termId}" id="termId">
+
+                        </li>
+                    </ol>
+                    <div class="clearfix"></div>
+                </div>
+                <!--End Page Title-->
+                <!--Start row-->
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="white-box">
+                            <h2 class="header-title">作业统计</h2>
+                               <div id="pieChart" style="width: 600px;height:400px;">
+
+                                </div>
+
+                         </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!--End row-->
+
+            </div>
+            <!-- End Wrapper-->
+
+            <!-- <div th:replace="/teacher/footer :: footerBar"></div>-->
+
+        </div>
+        <!--End main content -->
+
+
+
+        <!--Begin core plugin -->
+        <script src="/assets/js/jquery.min.js"></script>
+        <script src="/assets/js/bootstrap.min.js"></script>
+        <script src="/assets/plugins/moment/moment.js"></script>
+        <script src="/assets/js/jquery.slimscroll.js "></script>
+        <script src="/assets/js/jquery.nicescroll.js"></script>
+        <script src="/assets/js/functions.js"></script>
+        <!-- End core plugin -->
+
+        <script src="/assets/js/echarts.min.js"></script>
+
+        <script>
+            $(function(){
+                // 基于准备好的dom，初始化echarts实例
+                var myChart = echarts.init(document.getElementById('pieChart'));
+
+                var homeworkId = $("#homeworkId").val();
+                var termId = $("#termId").val();
+
+                var yitijiao = 0;
+                var weitijiao = 0;
+
+                 $.ajax({
+                          url:"/teacher/homework/ajax/statistics/"+termId+"/"+homeworkId,//url
+                          async:false,//是否异步
+                          type:"POST",//提交方式
+                          data:{},//前台数据
+                          success:function(data){  //执行成功的返回函数
+                            yitijiao = data.yitijiao;
+                            weitijiao = data.weitijiao;
+                          },
+                          error:function(){//执行失败的返回函数
+                             alert("请求失败");
+                          },
+                          dataType:"json"//数据格式
+                      });
+
+
+                option = {
+                    backgroundColor: '#2c343c',
+
+                    title: {
+                        text: '作业统计饼状图',
+                        left: 'center',
+                        top: 20,
+                        textStyle: {
+                            color: '#ccc'
+                        }
+                    },
+
+                    tooltip : {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    },
+
+                    visualMap: {
+                        show: false,
+                        min: 80,
+                        max: 600,
+                        inRange: {
+                            colorLightness: [0, 1]
+                        }
+                    },
+                    series : [
+                        {
+                            name:'学生人数',
+                            type:'pie',
+                            radius : '55%',
+                            center: ['50%', '50%'],
+                            data:[
+                                {value:weitijiao, name:'未提交'},
+                                {value:yitijiao, name:'已提交'}
+                            ].sort(function (a, b) { return a.value - b.value; }),
+                            roseType: 'radius',
+                            label: {
+                                normal: {
+                                    textStyle: {
+                                        color: 'rgba(255, 255, 255, 0.3)'
+                                    }
+                                }
+                            },
+                            labelLine: {
+                                normal: {
+                                    lineStyle: {
+                                        color: 'rgba(255, 255, 255, 0.3)'
+                                    },
+                                    smooth: 0.2,
+                                    length: 10,
+                                    length2: 20
+                                }
+                            },
+                            itemStyle: {
+                                normal: {
+                                    color: '#c23531',
+                                    shadowBlur: 200,
+                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                }
+                            },
+
+                            animationType: 'scale',
+                            animationEasing: 'elasticOut',
+                            animationDelay: function (idx) {
+                                return Math.random() * 200;
+                            }
+                        }
+                    ]
+                };
+
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+            })
+
+        </script>
+
+
+
+
+        </body>
+
+        </html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>讨论区</title>
+
+    <link href="/assets/plugins/morris-chart/morris.css" rel="stylesheet">
+    <link href="/assets/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet"/>
+    <link href="/assets/css/icons.css" rel="stylesheet">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/assets/css/responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+    <title>Title</title>
+</head>
+<body class="sticky-header">
+
+<!--引入左侧菜单栏-->
+<div th:replace="/teacher/lefter :: lefterBar(activeUrl='discussion')"></div>
+
+    <!-- main content start-->
+    <div class="main-content" >
+            <!--引入上部分-->
+            <div th:replace="/teacher/header :: headerBar"></div>
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+
+              <!--Start Page Title-->
+               <div class="page-title-box">
+                    <h4 class="page-title">讨论区</h4>
+
+                    <div class="clearfix"></div>
+                 </div>
+                  <!--End Page Title-->
+
+                  <!--Start row-->
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                           <div class="col-md-10">
+                                           <div class="white-box">
+                                              <div class="mailbox-content">
+                                              <table class="table">
+                                                  <thead>
+                                                      <tr>
+                                                          <th colspan="1" class="hidden-xs">
+                                                            <div >
+                                                                <label></label>
+                                                              </div>
+                                                          </th>
+                                                          <th class="text-right" colspan="5">
+                                                              <div class="btn-group m-r-sm mail-hidden-options">
+
+                                                                 <div class="btn-group">
+                                                                     <a class="btn btn-primary outline-btn m-r-10"  title="Refresh" onclick="javascript:window.location.reload()"><i class="fa fa-refresh"></i></a>
+                                                                  </div>
+                                                                  <div class="btn-group">
+                                                                      <a href="/teacher/discussion/toEdit" class="btn btn-primary outline-btn btn-block m-b-10">发布主题</a>
+                                                                  </div>
+                                                              </div>
+                                                          </th>
+                                                      </tr>
+                                                  </thead>
+                                                  <tbody>
+                                                      <tr class="unread">
+                                                          <td class="hidden-xs">
+                                                            <div>
+                                                               id
+                                                                <label></label>
+                                                              </div>
+                                                          </td>
+                                                          <td class="hidden-xs">
+                                                              <i class="fa fa-star icon-state-warning"></i>
+                                                          </td>
+                                                          <td class="hidden-xs">
+                                                              发布者
+                                                          </td>
+                                                          <td>
+                                                              主题 </td>
+                                                          <td>
+                                                          </td>
+                                                          <td>
+                                                              时间
+                                                          </td>
+                                                      </tr>
+                                                      <tr class="unread" th:each="topic:${pageResult.list}">
+
+                                                          <td class="hidden-xs">
+                                                             <div>
+                                                               [[${topic.id}]]
+                                                              </div>
+                                                          </td>
+                                                          <td class="hidden-xs">
+                                                              <i class="fa fa-star icon-state-warning"></i>
+                                                          </td>
+                                                          <td class="hidden-xs">
+                                                              [[${topic.author.name}]]
+                                                          </td>
+                                                          <td>
+                                                              <a th:href="@{/teacher/discussion/discussionList/}+${topic.id}">[[${topic.topic}]]</a>
+                                                          </td>
+                                                          <td>
+                                                          </td>
+                                                          <td>
+                                                          [[${#dates.format(topic.time,'yyyy-MM-dd HH:mm:ss')}]]
+                                                          </td>
+
+                                                      </tr>
+                                                  </tbody>
+                                              </table>
+                                              </div>
+
+                                              <div class="col-md-12">
+                                               <div class="row">
+                                                <div class="col-md-7"> Showing 1 - [[${pageResult.rows}]] of [[${pageResult.total}]] </div>
+                                                <div class="col-md-5">
+                                                  <div class="btn-group pull-right">
+                                                        <!--分页开始-->
+                                                     <nav aria-label="Page navigation" style="text-align: center">
+                                                       <ul class="pagination">
+                                                             <li>
+                                                              <a th:href="@{/teacher/discussion/topicList?page=}+${pageResult.page-1>0?pageResult.page-1:1}" aria-label="Previous">
+                                                               <span aria-hidden="true">&laquo;</span>
+                                                              </a>
+                                                             </li>
+
+                                                             <li th:each="i:${#numbers.sequence(1,pageResult.pageSize)}">
+                                                                <a th:href="@{/teacher/discussion/topicList?page=}+${i}">[[${i}]]</a>
+                                                             </li>
+
+                                                             <li>
+                                                                 <a th:href="@{/teacher/discussion/topicList?page=}+${pageResult.page+1>pageResult.pageSize?pageResult.pageSize:pageResult.page+1}" aria-label="Next">
+                                                                  <span aria-hidden="true">&raquo;</span>
+                                                                 </a>
+                                                             </li>
+                                                        </ul>
+                                                       </nav>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              </div>
+
+                                          </div>
+                                          </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <!--End row-->
+<script type="text/javascript">
+    window.onload = function() {
+        var inputArr = document.getElementsByTagName('input');
+        for(var i =0;i<inputArr.length;i++) {
+            var name = inputArr[i].name;
+            inputArr[i].(th:value)='${param.'+name+'}';
+        }
+    }
+</script>
+
+            </div>
+      <!-- End Wrapper-->
+
+
+
+
+       </div>
+      <!--End main content -->
+
+
+
+    <!--Begin core plugin -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/plugins/moment/moment.js"></script>
+    <script  src="/assets/js/jquery.slimscroll.js "></script>
+    <script src="/assets/js/jquery.nicescroll.js"></script>
+    <script src="/assets/js/functions.js"></script>
+    <!-- End core plugin -->
+
+
+</body>
+
+</html>

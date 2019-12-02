@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title></title>
+
+    <link href="/assets/plugins/morris-chart/morris.css" rel="stylesheet">
+    <link href="/assets/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet"/>
+    <link href="/assets/css/icons.css" rel="stylesheet">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/assets/css/responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+    <title>Title</title>
+</head>
+<body>
+<!--Start left side Menu-->
+<div class="left-side sticky-left-side" th:fragment="lefterBar">
+
+    <!--logo-->
+    <div class="logo">
+        <a th:href="@{/index.html}"><img src="/assets/images/stuPic.png" alt=""></a><br/>
+    </div>
+
+    <!--<div class="logo-icon text-center">
+        <a href="index.html"><img src="assets/images/logo-icon.png" alt=""></a>
+    </div>-->
+    <!--logo-->
+
+    <div class="left-side-inner">
+        <!--Sidebar nav-->
+        <ul class="nav nav-pills nav-stacked custom-nav">
+
+            <li ><a th:href="@{/student/message/list}"><i class="icon-bell"></i> <span>通知公告</span></a></li>
+            <!--<li ><a href="#"><i class="icon-film"></i> <span>评分标准</span></a></li>-->
+            <li ><a th:href="@{/student/course/courseList}"><i class="icon-folder"></i> <span>学习资料</span></a></li>
+            <li ><a th:href="@{/student/homework/list}"><i class="icon-pencil"></i> <span>检测与作业</span></a></li>
+            <li ><a th:href="@{/student/discussion/topicList}"><i class="icon-speech"></i> <span>讨论区</span></a></li>
+
+        </ul>
+        <!--End sidebar nav-->
+
+    </div>
+</div>
+<!--End left side menu-->
+</body>
+</html>

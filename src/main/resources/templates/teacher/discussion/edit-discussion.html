@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>发布帖子</title>
+
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link href="/assets/plugins/summernote-master/summernote.css" rel="stylesheet" type="text/css"/>
+    <!-- END PAGE LEVEL STYLES -->
+    <link href="/assets/css/icons.css" rel="stylesheet">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/assets/css/responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+          <script src="/js/html5shiv.min.js"></script>
+          <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body class="sticky-header">
+    <!--引入左侧菜单栏-->
+    <div th:replace="/teacher/lefter :: lefterBar(activeUrl='discussion')"></div>
+    <!-- main content start-->
+    <div class="main-content" >
+ <!--引入上部分-->
+            <div th:replace="/teacher/header :: headerBar"></div>
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+              <!--Start Page Title-->
+               <div class="page-title-box">
+                    <h4 class="page-title">发布帖子</h4>
+                    <div class="clearfix"></div>
+                 </div>
+                  <!--End Page Title-->
+
+                  <!--Start row-->
+                    <div class="row">
+                       <div class="col-md-12">
+                       <div class="row">
+                        <div class="col-md-12">
+                          <div class="white-box">
+                            <div class="mailbox-content">
+
+                             <div class="mailbox-header">
+                                  <div class="compose-options">
+                                        <div class="pull-right">
+                                            <a href="inbox.html" class="btn btn-default" style="text-align: left"><i class="ion-arrow-left-a"></i>返回主题列表</a>
+                                        </div>
+                                 </div>
+                            </div>
+
+                                <div class="compose-body">
+                                    <form class="row" method="post" th:action="@{/teacher/discussion/publish}">
+                                        <input type="hidden" name="publishId" th:value="${session.user!=null?session.user.id:0}">
+                                        <div class="form-group">
+                                            <label for="subject" class="col-md-2 control-label">主题</label>
+                                            <div class="col-md-10">
+                                                <input type="text" class="form-control" id="subject" name="topic">
+                                            </div>
+                                        </div>
+                                         <div class="compose-message">
+                                           <textarea class="summernote" name="content">
+                                            </textarea>
+                                          </div>
+                                         <div class="compose-options">
+                                              <div class="pull-right">
+                                               <button type="submit" class="btn btn-primary"><i class="fa fa-send"></i>发布</button>
+                                              </div>
+                                          </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                          </div>
+                       </div>
+                      </div>
+                    </div>
+                    <!--End row-->
+
+
+			    </div>
+        <!-- End Wrapper-->
+
+
+
+       </div>
+      <!--End main content -->
+
+
+
+    <!--Begin core plugin -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/plugins/moment/moment.js"></script>
+    <script  src="/assets/js/jquery.slimscroll.js "></script>
+    <script src="/assets/js/jquery.nicescroll.js"></script>
+    <script src="/assets/js/functions.js"></script>
+    <!-- End core plugin -->
+
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+	<script src="/assets/plugins/summernote-master/summernote.min.js"></script>
+    <script src="/assets/pages/compose.js"></script>
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+
+
+</body>
+
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>个人信息管理</title>
+
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link href="/assets/plugins/summernote-master/summernote.css" rel="stylesheet" type="text/css"/>
+    <!-- END PAGE LEVEL STYLES -->
+    <link href="/assets/css/icons.css" rel="stylesheet">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/assets/css/responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+          <script src="/js/html5shiv.min.js"></script>
+          <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body class="sticky-header">
+    <!--引入左侧菜单栏-->
+    <div th:replace="/student/lefter :: lefterBar"></div>
+    <!-- main content start-->
+    <div class="main-content" >
+ <!--引入上部分-->
+            <div th:replace="/student/header :: headerBar"></div>
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+              <!--Start Page Title-->
+               <div class="page-title-box">
+                    <h4 class="page-title">个人信息管理</h4>
+                    <div class="clearfix"></div>
+                 </div>
+                  <!--End Page Title-->
+
+<!--Start row-->
+             <div class="row">
+                <div class="col-md-6">
+                          <div class="card-profile">
+                             <div class="profile-header">
+                             <img th:src="${user.image}"  alt="">
+                             </div>
+                             <div class="profile-body">
+                             <form th:action="@{/student/personInfo/edit}" method="post" enctype="multipart/form-data">
+                             <input type="hidden" th:value="${user.id}" name="id">
+                                 <ul class="profile-contact">
+                                 <label for="exampleInputFile" >选择头像文件</label>
+                                   <li><input type="file" name="file"></li><br/>
+                                    <img th:src="${user.image}"  alt="" height="100" width="100"><br/>
+                                    <li>姓名:<input type="text" th:value="${user.name}" name="name"></li><br/>
+                                    <li>密码:<input type="password" th:value="${user.password}" name="password"></li><br/>
+                                </ul>
+                                <button type="submit" class="btn btn-primary">编辑</button>
+                               </form>
+                             </div>
+                          </div>
+                      </div> <!--/.col-md-4-->
+
+
+                        </form>
+                   </div>
+                  </div>
+              </div>
+             <!--End row-->
+
+
+			    </div>
+        <!-- End Wrapper-->
+
+
+        <!--Start  Footer -->
+        <div th:replace="/student/footer :: footerBar"></div>
+         <!--End footer -->
+
+       </div>
+      <!--End main content -->
+
+
+
+    <!--Begin core plugin -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/plugins/moment/moment.js"></script>
+    <script  src="/assets/js/jquery.slimscroll.js "></script>
+    <script src="/assets/js/jquery.nicescroll.js"></script>
+    <script src="/assets/js/functions.js"></script>
+    <!-- End core plugin -->
+
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+	<script src="/assets/plugins/summernote-master/summernote.min.js"></script>
+    <script src="/assets/pages/compose.js"></script>
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+
+
+</body>
+
+</html>
